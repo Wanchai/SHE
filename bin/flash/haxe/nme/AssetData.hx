@@ -20,6 +20,14 @@ class AssetData {
 			
 			className.set ("img/space-back.png", nme.NME_img_space_back_png);
 			type.set ("img/space-back.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			className.set ("img/space-ball.png", nme.NME_img_space_ball_png);
+			type.set ("img/space-ball.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			className.set ("img/space-obs1.png", nme.NME_img_space_obs1_png);
+			type.set ("img/space-obs1.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			className.set ("img/space-obs2.png", nme.NME_img_space_obs2_png);
+			type.set ("img/space-obs2.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			className.set ("img/space-obs3.png", nme.NME_img_space_obs3_png);
+			type.set ("img/space-obs3.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			className.set ("img/space-set.png", nme.NME_img_space_set_png);
 			type.set ("img/space-set.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			className.set ("assets/lib.swf", nme.NME_assets_lib_swf);
@@ -40,6 +48,10 @@ class AssetData {
 
 
 class NME_img_space_back_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
+class NME_img_space_ball_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
+class NME_img_space_obs1_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
+class NME_img_space_obs2_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
+class NME_img_space_obs3_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 class NME_img_space_set_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_lib_swf extends flash.utils.ByteArray { }
 class NME_libraries_lib_swf extends flash.utils.ByteArray { }

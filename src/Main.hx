@@ -60,7 +60,8 @@ class Main extends Sprite {
 		btn.addEventListener(MouseEvent.CLICK, start);		
 	}
 	
-	private function start(e:MouseEvent):Void {		
+	private function start(e:MouseEvent):Void {	
+		removeChild(btn);
 		var lvl:Level = new Level("space");
 		addChild(lvl);
 		
