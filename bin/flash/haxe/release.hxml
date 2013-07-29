@@ -13,6 +13,6 @@
 -dce std
 -swf-version 11
 -swf bin/flash/bin/SHE.swf
--swf-header 480:320:60:000000
+-swf-header 960:640:60:000000
 -cp bin/flash/haxe
 #--remap nme:flash

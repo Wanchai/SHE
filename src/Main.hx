@@ -1,17 +1,14 @@
 package ;
 
 import flash.display.Sprite;
-import flash.display.StageScaleMode;
 import flash.events.Event;
 import flash.events.MouseEvent;
 import flash.Lib;
 import flash.text.Font;
-import flash.text.TextField;
-import flash.text.TextFormat;
 import game.Constants;
 import game.Level;
+import game.SoundPlayer;
 import openfl.Assets;
-import openfl.display.FPS;
 
 /**
  * ...
@@ -21,8 +18,9 @@ import openfl.display.FPS;
  @:font("assets/Alpha Taurus.ttf") class DefaultFont extends Font {}
 
 class Main extends Sprite {
-	var inited:Bool;
-	
+	var inited:Bool;	
+	var music:SoundPlayer;
+	var lvl:Level;
 
 	/* ENTRY POINT */
 	
@@ -36,38 +34,56 @@ class Main extends Sprite {
 		inited = true;
 
 		/** Code **/
+		music = new SoundPlayer("audio/music.mp3");
+		music.loop();
 		
-		/*var format:TextFormat = new TextFormat("Alpha Taurus", 70, 0xFFFFFF);
-		var textField:TextField = new TextField ();
-		
-		textField.defaultTextFormat = format;
-		textField.embedFonts = true;
-		textField.selectable = false;
-		
-		textField.x = 220;
-		textField.y = 200;
-		textField.width = 500;
-		
-		textField.text = "WELCOME TO SHE";	
-		addChild (textField);*/
+		var splash = Assets.getMovieClip ("lib:Splash");
+		addChild(splash);
 		
 		var btn = Assets.getMovieClip ("lib:StartBtn");
 		btn.x = stage.stageWidth / 2;
 		btn.y = stage.stageHeight / 2;
 		btn.buttonMode = true;
+		btn.stop();
 		addChild (btn);
 		
 		btn.addEventListener(MouseEvent.CLICK, start);		
+		btn.addEventListener(MouseEvent.MOUSE_OVER, overHand);		
+		btn.addEventListener(MouseEvent.MOUSE_OUT, outHand);
+		
+		var cred = Assets.getMovieClip ("lib:Credits");
+		cred.x = Constants.WIDTH - 60;
+		cred.y = Constants.HEIGHT - 20;
+		cred.buttonMode = true;
+		cred.stop();
+		addChild(cred);
+		cred.addEventListener(MouseEvent.MOUSE_OVER, overHand);		
+		cred.addEventListener(MouseEvent.MOUSE_OUT, outHand);
 	}
 	
-	private function start(e:MouseEvent):Void {	
-		removeChild(btn);
-		var lvl:Level = new Level("space");
+	function outHand(e:MouseEvent):Void {
+		e.target.gotoAndStop(1);
+	}
+	
+	function overHand(e:MouseEvent):Void {
+		e.target.gotoAndStop(2);
+	}
+	
+	function start(e:MouseEvent):Void {
+		lvl = new Level("space");
 		addChild(lvl);
+		lvl.addEventListener("endLevel", endLevelHand);
 		
 		this.scaleX = this.scaleY = Constants.RATIO;
-		
-		addChild(new FPS());
+	}
+	
+	private function endLevelHand(e:Event):Void {
+		removeChild(lvl);
+		lvl.removeEventListener("endLevel", endLevelHand);
+		lvl.clearMe();
+		lvl = null;
+		var end = Assets.getMovieClip ("lib:End");
+		addChild(end);
 	}
 
 	/* SETUP */

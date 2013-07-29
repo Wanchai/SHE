@@ -5,6 +5,7 @@ import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.KeyboardEvent;
 import flash.Lib;
+import game.SoundPlayer;
 import motion.Actuate;
 import motion.easing.Quad;
 import space.Legs;
@@ -22,6 +23,8 @@ class Character extends Sprite {
 	var i:Float = 0.5;
 	var j:Float = 0.5;
 	var jumping:Bool = false;
+	var jumpSound:SoundPlayer;
+	var wackSound:SoundPlayer;
 	public var isHit:Bool = false;
 	public var legs:MovieClip;
 	public var tronc:MovieClip;
@@ -38,18 +41,19 @@ class Character extends Sprite {
 		removeEventListener(Event.ADDED_TO_STAGE, init);
 		Lib.current.stage.addEventListener (KeyboardEvent.KEY_DOWN, controlsHand);
 		
+		jumpSound = new SoundPlayer("audio/jump.mp3");
+		wackSound = new SoundPlayer("audio/wack.mp3");
+		
 		legs = new Legs();
 		tronc = new Tronc();
 		shadow = new Shadow();
-		
-		body.x = Constants.WIDTH * 25 / 100;
-		body.y = Constants.HEIGHT * 80 / 100;
+		body = new MovieClip();
 		
 		tronc.x = legs.x +13;
 		tronc.y = legs.y - 90;
 		
-		shadow.x = legs.x + 10 ;
-		shadow.y = legs.y;
+		shadow.x = body.x + 10 ;
+		shadow.y = body.y;
 		shadowW = shadow.width;
 		
 		tronc.stop();		
@@ -67,22 +71,21 @@ class Character extends Sprite {
 	}
 	
 	public function wack() {
+		wackSound.play();
 		tronc.gotoAndPlay(1);
 	}
 	
 	public function jump() {
 		if (!jumping) {
+			jumpSound.play();
 			jumping = true;
-			Actuate.tween (body, 0.3, { y: tronc.y - 200 }, false).ease (Quad.easeOut).repeat (1).reflect ();
-			//Actuate.tween (legs, 0.3, { y: legs.y - 200 }, false).ease (Quad.easeOut).repeat (1).reflect ();
-			Actuate.tween (shadow, 0.32, { width: shadowW/2, height: shadow.height/2}, false).ease (Quad.easeOut).onComplete (jumpComplete).repeat (1).reflect ();
+			Actuate.tween (body, 0.3, { y: body.y - 200 }, false).ease (Quad.easeOut).repeat (1).reflect ();
+			Actuate.tween (shadow, 0.3, { width: shadowW/2, height: shadow.height/2}, false).ease (Quad.easeOut).onComplete (jumpComplete).repeat (1).reflect ();
 		}
 	}
 	
 	function jumpComplete() {
 		jumping = false;
-		tronc.x = legs.x +13;
-		tronc.y = legs.y - 90;	
 	}
 	
 	private function anim(e:Event):Void {
@@ -92,6 +95,12 @@ class Character extends Sprite {
 		else if (i < -1) j = 0.5;
 		
 		if (tronc.currentFrame == 12) tronc.gotoAndStop(1);
+	}
+	
+	public function clearMe() {
+		Lib.current.stage.removeEventListener (KeyboardEvent.KEY_DOWN, controlsHand);
+		removeChildren();
+		
 	}
 	
 }

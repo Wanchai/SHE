@@ -13,7 +13,7 @@ import flash.text.TextFormatAlign;
 class Score extends Sprite {
 	
 	var scoreTF:TextField;
-	var scoreNum:Int = 0;
+	public var scoreNum:Int = 0;
 
 	public function new() {
 		super();
@@ -23,19 +23,20 @@ class Score extends Sprite {
 	private function init(e:Event):Void {
 		removeEventListener(Event.ADDED_TO_STAGE, init);
 		
-		graphics.beginFill (0xcccccc);
-		graphics.drawRect(0,0, 200, 50);
-		alpha = 0.5;
+		var frame = new Sprite();
+		frame.graphics.beginFill (0xcccccc);
+		frame.graphics.drawRect(0,0, 100, 35);
+		frame.alpha = 0.5;
+		addChild(frame);
 		
 		scoreTF = new TextField();
-		scoreTF.width = 200;	
-		scoreTF.height= 50;	
+		scoreTF.width = 100;
+		scoreTF.height= 35;	
 		
 		var format:TextFormat = new TextFormat();
-		format.font = "Verdana";
+		format.font = "Alpha Taurus";
 		format.color = 0xFFFFFF;
-		format.size = 36;
-		format.bold = true;
+		format.size = 30;
 		format.align = TextFormatAlign.RIGHT;
 		
 		scoreTF.defaultTextFormat = format;

@@ -32,6 +32,16 @@ class AssetData {
 			type.set ("img/space-set.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			className.set ("assets/lib.swf", nme.NME_assets_lib_swf);
 			type.set ("assets/lib.swf", Reflect.field (AssetType, "binary".toUpperCase ()));
+			className.set ("audio/clap.mp3", nme.NME_audio_clap_mp3);
+			type.set ("audio/clap.mp3", Reflect.field (AssetType, "music".toUpperCase ()));
+			className.set ("audio/jump.mp3", nme.NME_audio_jump_mp3);
+			type.set ("audio/jump.mp3", Reflect.field (AssetType, "music".toUpperCase ()));
+			className.set ("audio/lol.mp3", nme.NME_audio_lol_mp3);
+			type.set ("audio/lol.mp3", Reflect.field (AssetType, "music".toUpperCase ()));
+			className.set ("audio/music.mp3", nme.NME_audio_music_mp3);
+			type.set ("audio/music.mp3", Reflect.field (AssetType, "music".toUpperCase ()));
+			className.set ("audio/wack.mp3", nme.NME_audio_wack_mp3);
+			type.set ("audio/wack.mp3", Reflect.field (AssetType, "music".toUpperCase ()));
 			className.set ("libraries/lib.swf", nme.NME_libraries_lib_swf);
 			type.set ("libraries/lib.swf", Reflect.field (AssetType, "binary".toUpperCase ()));
 			
@@ -54,4 +64,9 @@ class NME_img_space_obs2_png extends flash.display.BitmapData { public function 
 class NME_img_space_obs3_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 class NME_img_space_set_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_lib_swf extends flash.utils.ByteArray { }
+class NME_audio_clap_mp3 extends flash.media.Sound { }
+class NME_audio_jump_mp3 extends flash.media.Sound { }
+class NME_audio_lol_mp3 extends flash.media.Sound { }
+class NME_audio_music_mp3 extends flash.media.Sound { }
+class NME_audio_wack_mp3 extends flash.media.Sound { }
 class NME_libraries_lib_swf extends flash.utils.ByteArray { }
