@@ -1,4 +1,6 @@
-Nécessite  
+Haxe Game made for a job interview
+
+Requirements
 
 haxelib install openfl
 
